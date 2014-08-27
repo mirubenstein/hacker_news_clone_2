@@ -1,4 +1,5 @@
 class LinksController < ApplicationController
+
   def index
     @links = Link.calc_rank
   end
@@ -19,6 +20,7 @@ class LinksController < ApplicationController
 
   def show
     @link = Link.find(params[:id])
+    @comment = Comment.new(commentable_type: "Link", commentable_id: @link.id)
   end
 
   def edit
@@ -54,4 +56,5 @@ private
   def link_params
     params.require(:link).permit(:url, :description)
   end
+
 end
