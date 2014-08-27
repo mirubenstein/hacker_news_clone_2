@@ -1,6 +1,6 @@
 class LinksController < ApplicationController
   def index
-    @links = Link.all
+    @links = Link.calc_rank
   end
 
   def new
@@ -21,8 +21,37 @@ class LinksController < ApplicationController
     @link = Link.find(params[:id])
   end
 
+  def edit
+     @link = Link.find(params[:id])
+   end
+
+  def update
+    @link = Link.find(params[:id])
+    if link.update(link_params)
+      flash[:notice] = "Link updated"
+      redirect_to link_path(@link)
+    else
+      flash[:alert] = "error, try again."
+      render 'edit'
+    end
+  end
+
+  def destroy
+    @link = Link.find(params[:id])
+    @link.destroy
+    flash[:notice] = "The link has been deleted."
+    redirect_to links_path
+  end
+
+  def upvote
+    @link = Link.find(params[:id])
+    Link.increment_counter(:votes, params[:id])
+    flash[:notice] = "#{@link.description} was successfully upvoted!"
+    redirect_to links_path
+  end
+
 private
   def link_params
-    params.require(:link).permit(:url)
+    params.require(:link).permit(:url, :description)
   end
 end

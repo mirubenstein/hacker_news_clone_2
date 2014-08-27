@@ -2,8 +2,12 @@
 
 <%= form_for(@link) do |f| %>
   <div class="form-group">
+    <%= f.label :description %>
+    <%= f.text_field :description %>
+
     <%= f.label :url %>
     <%= f.text_field :url %>
+
   </div>
   <%= f.submit(:class => "btn btn-primary") %>
 <% end %>
