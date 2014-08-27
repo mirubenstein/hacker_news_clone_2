@@ -1,0 +1,11 @@
+default: &default
+  adapter: postgresql
+
+
+development:
+  <<: *default
+  database: hacker_news_development
+
+test:
+  <<: *default
+  database: hacker_news_test

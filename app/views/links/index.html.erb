@@ -1,0 +1,8 @@
+<div class="page-header">
+  <h1>Hacker News <small>Top stories</small></h1>
+</div>
+<ul>
+  <% @links.each do |link| %>
+    <li><%= link_to "#{link.url}", link_path(link) %></li>
+  <% end %>
+</ul>
