@@ -1,0 +1,11 @@
+<li class="comment">
+  <div class="body">
+    <%= comment.text %>
+  <%= link_to '(Reply)', new_comment_comment_path(comment) %>
+  </div>
+  <% unless comment.comments.empty? %>
+    <ul class="comment_list">
+      <%= render :partial => 'layout/comment', :collection => comment.comments %>
+    </ul>
+  <% end %>
+</li>
